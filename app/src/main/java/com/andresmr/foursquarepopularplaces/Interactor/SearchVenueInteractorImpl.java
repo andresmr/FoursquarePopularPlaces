@@ -1,6 +1,6 @@
 package com.andresmr.foursquarepopularplaces.interactor;
 
-import com.andresmr.foursquarepopularplaces.Service.RestService;
+import com.andresmr.foursquarepopularplaces.service.RestService;
 import com.andresmr.foursquarepopularplaces.listener.VenuesRequestListener;
 
 /**
