@@ -8,47 +8,31 @@ import android.widget.ListView;
 
 import com.andresmr.foursquarepopularplaces.Service.RestService;
 import com.andresmr.foursquarepopularplaces.pojo.FourSquareResponse;
+import com.andresmr.foursquarepopularplaces.presenter.SearchVenuesPresenter;
+import com.andresmr.foursquarepopularplaces.presenter.SearchVenuesPresenterImpl;
+import com.andresmr.foursquarepopularplaces.view.SearchVenueView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SearchVenueView {
 
     @BindView(R.id.etSearch)
     EditText etSearch;
+
     @OnClick(R.id.btnSearch)
     void onBtnSearchClick(){
 
-        restService.exploreVenues(etSearch.getText().toString(), new VenuesRequestListener() {
-            @Override
-            public void onGetVenuesSuccessful(FourSquareResponse[] fourSquareResponseArray) {
-
-                String[] venuesName = new String[fourSquareResponseArray.length];
-
-                for (int i=0; i<fourSquareResponseArray.length; i++) {
-
-                    venuesName[i] = fourSquareResponseArray[i].getVenue().getName();
-                }
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1, android.R.id.text1, venuesName);
-
-                lstResults.setAdapter(adapter);
-
-                //List<FourSquareResponse> lList = Arrays.asList(fourSquareResponseArray);
-            }
-
-            @Override
-            public void onGetVenuesError(Throwable throwable) {
-
-            }
-        });
+        mPresenter.onSearchButtonClick();
     }
+
     @BindView(R.id.lstResults)
     ListView lstResults;
 
-    RestService restService;
+    SearchVenuesPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +41,19 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        restService = new RestService();
+        mPresenter = new SearchVenuesPresenterImpl(this);
+    }
+
+    @Override
+    public String getQuery() {
+
+        return etSearch.getText().toString();
+    }
+
+    @Override
+    public void setQueryError(int error) {
+
+        etSearch.requestFocus();
+        etSearch.setError(getString(error));
     }
 }

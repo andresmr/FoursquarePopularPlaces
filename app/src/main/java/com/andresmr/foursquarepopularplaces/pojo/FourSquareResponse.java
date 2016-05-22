@@ -11,8 +11,6 @@ public class FourSquareResponse {
     Venue venue;
     List<Tip> tips;
 
-    public FourSquareResponse(){}
-
     public FourSquareResponse(Venue venue, List<Tip> tips){
 
         this.venue = venue;

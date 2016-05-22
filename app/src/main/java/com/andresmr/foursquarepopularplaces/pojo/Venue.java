@@ -10,8 +10,6 @@ public class Venue {
     String name;
     Location location;
 
-    public Venue(){};
-
     public Venue(String id, String name, Location location){
 
         this.id = id;

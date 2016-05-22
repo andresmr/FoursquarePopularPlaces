@@ -5,6 +5,9 @@ import com.andresmr.foursquarepopularplaces.pojo.FourSquareResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.Arrays;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +28,9 @@ public class RestService {
 
     Service service;
 
+    /**
+     * Service creation with custom Gson Serializer to get only needed info from the API
+     */
     public RestService(){
 
         Gson gson = new GsonBuilder()
@@ -39,6 +45,11 @@ public class RestService {
         service =  retrofit.create(Service.class);
     }
 
+    /**
+     * Performs a GET request to Foursquare API
+     * @param near place or location introduced by the user
+     * @param listener request callback successful or error
+     */
     public void exploreVenues(String near, final VenuesRequestListener listener){
 
         Call<FourSquareResponse[]> call = service.exploreVenues(
@@ -52,13 +63,23 @@ public class RestService {
             @Override
             public void onResponse(Call<FourSquareResponse[]> call, Response<FourSquareResponse[]> response) {
 
-                listener.onGetVenuesSuccessful(response.body());
+                //If whe don´t get any response, returns an error, if not parse response as a List
+                if(response.body()!= null){
+
+                    List<FourSquareResponse> fourSquareResponseList = Arrays.asList(response.body());
+
+                    listener.onGetVenuesSuccessful(fourSquareResponseList);
+                }
+                else{
+
+                    listener.onGetVenuesError();
+                }
             }
 
             @Override
             public void onFailure(Call<FourSquareResponse[]> call, Throwable t) {
 
-                //listener.onGetVenuesError(t);
+                listener.onGetVenuesError();
             }
         });
     }
