@@ -1,4 +1,4 @@
-package com.andresmr.foursquarepopularplaces.Interactor;
+package com.andresmr.foursquarepopularplaces.interactor;
 
 import com.andresmr.foursquarepopularplaces.VenuesRequestListener;
 

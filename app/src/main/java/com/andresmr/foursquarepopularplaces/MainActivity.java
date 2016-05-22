@@ -1,12 +1,11 @@
 package com.andresmr.foursquarepopularplaces;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.andresmr.foursquarepopularplaces.Service.RestService;
+import com.andresmr.foursquarepopularplaces.adapter.VenueListAdapter;
 import com.andresmr.foursquarepopularplaces.pojo.FourSquareResponse;
 import com.andresmr.foursquarepopularplaces.presenter.SearchVenuesPresenter;
 import com.andresmr.foursquarepopularplaces.presenter.SearchVenuesPresenterImpl;
@@ -55,5 +54,13 @@ public class MainActivity extends AppCompatActivity implements SearchVenueView {
 
         etSearch.requestFocus();
         etSearch.setError(getString(error));
+    }
+
+    @Override
+    public void showResults(List<FourSquareResponse> fourSquareResponseList) {
+
+        VenueListAdapter adapter = new VenueListAdapter(getApplicationContext(), fourSquareResponseList);
+
+        lstResults.setAdapter(adapter);
     }
 }
