@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="@dimen/activity_horizontal_margin">
 
-    <TextView
-        android:id="@+id/tvVenueName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_title"/>
+    <ImageView
+        android:id="@+id/ivVenueImage"
+        android:layout_width="@dimen/photo_size"
+        android:layout_height="@dimen/photo_size"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/foursquare_placeholder"
+        android:scaleType="centerCrop"/>
 
-    <TextView
-        android:id="@+id/tvVenueAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/dark_grey"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_subtitle"/>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/tvVenueName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_title"/>
+
+        <TextView
+            android:id="@+id/tvVenueAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_grey"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_subtitle"/>
+    </LinearLayout>
 </LinearLayout>

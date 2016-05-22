@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andresmr.foursquarepopularplaces.R;
 import com.andresmr.foursquarepopularplaces.pojo.FourSquareResponse;
+import com.andresmr.foursquarepopularplaces.pojo.Tip;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -79,6 +82,25 @@ public class VenueListAdapter  extends ArrayAdapter<FourSquareResponse> {
 
         FourSquareResponse fourSquareResponse = fourSquareResponseList.get(position);
 
+        String venueImage = null;
+
+        if(fourSquareResponse.getTips().size() > 0){
+
+            for (Tip tip : fourSquareResponse.getTips()){
+
+                if(tip.getPhotourl() != null){
+
+                    venueImage = tip.getPhotourl();
+                }
+            }
+        }
+
+        Picasso.with(context).
+                load(venueImage).
+                placeholder(R.drawable.foursquare_placeholder).
+                error(R.drawable.foursquare_placeholder)
+                .into(holder.ivVenueImage);
+
         holder.tvVenueName.setText(fourSquareResponse.getVenue().getName());
         holder.tvVenueAddress.setText(fourSquareResponse.getVenue().getLocation().getAddress());
     }
@@ -88,12 +110,14 @@ public class VenueListAdapter  extends ArrayAdapter<FourSquareResponse> {
      */
     public class ViewHolder {
 
+        private ImageView ivVenueImage;
         private TextView tvVenueName;
         private TextView tvVenueAddress;
 
         //Builder retrieve file view
         public ViewHolder(View itemView) {
 
+            ivVenueImage = (ImageView) itemView.findViewById(R.id.ivVenueImage);
             tvVenueName = (TextView) itemView.findViewById(R.id.tvVenueName);
             tvVenueAddress = (TextView) itemView.findViewById(R.id.tvVenueAddress);
         }
