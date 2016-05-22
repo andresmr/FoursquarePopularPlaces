@@ -1,4 +1,4 @@
-package com.andresmr.foursquarepopularplaces;
+package com.andresmr.foursquarepopularplaces.listener;
 
 import com.andresmr.foursquarepopularplaces.pojo.FourSquareResponse;
 

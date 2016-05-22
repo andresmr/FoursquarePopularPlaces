@@ -1,9 +1,13 @@
 package com.andresmr.foursquarepopularplaces;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.andresmr.foursquarepopularplaces.adapter.VenueListAdapter;
 import com.andresmr.foursquarepopularplaces.pojo.FourSquareResponse;
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements SearchVenueView {
     ListView lstResults;
 
     SearchVenuesPresenter mPresenter;
+    VenueListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +62,29 @@ public class MainActivity extends AppCompatActivity implements SearchVenueView {
     }
 
     @Override
+    public void hideKeyboard() {
+
+        // Check if no view has focus:
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    @Override
     public void showResults(List<FourSquareResponse> fourSquareResponseList) {
 
-        VenueListAdapter adapter = new VenueListAdapter(getApplicationContext(), fourSquareResponseList);
+        adapter = new VenueListAdapter(getApplicationContext(), fourSquareResponseList);
 
         lstResults.setAdapter(adapter);
+    }
+
+    @Override
+    public void showNoResults() {
+
+        lstResults.setAdapter(null);
+
+        Toast.makeText(getApplicationContext(), getString(R.string.no_results), Toast.LENGTH_LONG).show();
     }
 }

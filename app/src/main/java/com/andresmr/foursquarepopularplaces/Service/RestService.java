@@ -1,6 +1,6 @@
 package com.andresmr.foursquarepopularplaces.Service;
 
-import com.andresmr.foursquarepopularplaces.VenuesRequestListener;
+import com.andresmr.foursquarepopularplaces.listener.VenuesRequestListener;
 import com.andresmr.foursquarepopularplaces.pojo.FourSquareResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

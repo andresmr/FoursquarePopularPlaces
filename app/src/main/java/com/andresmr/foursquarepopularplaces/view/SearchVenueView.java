@@ -13,5 +13,8 @@ public interface SearchVenueView {
     String getQuery();
     void setQueryError(int error);
 
+    void hideKeyboard();
+
     void showResults(List<FourSquareResponse> fourSquareResponseList);
+    void showNoResults();
 }

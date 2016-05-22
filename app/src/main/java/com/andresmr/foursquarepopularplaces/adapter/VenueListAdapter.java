@@ -24,7 +24,7 @@ public class VenueListAdapter  extends ArrayAdapter<FourSquareResponse> {
     // Global Variables
     Context context;
     private List<FourSquareResponse> fourSquareResponseList;
-    private LayoutInflater inflator;
+    private LayoutInflater inflater;
 
     // Constructor
     public VenueListAdapter(Context _context, List<FourSquareResponse> fourSquareResponseList) {
@@ -33,7 +33,7 @@ public class VenueListAdapter  extends ArrayAdapter<FourSquareResponse> {
         this.fourSquareResponseList = fourSquareResponseList;
         this.context = _context;
 
-        inflator = LayoutInflater.from(_context);
+        inflater = LayoutInflater.from(_context);
     }
 
     /**
@@ -52,7 +52,7 @@ public class VenueListAdapter  extends ArrayAdapter<FourSquareResponse> {
         if (convertView == null) {
 
             //Get file view inflating layout
-            convertView = inflator.inflate(R.layout.item_venue, parent, false);
+            convertView = inflater.inflate(R.layout.item_venue, parent, false);
 
             //Create holder view for the item
             holder = new ViewHolder(convertView);
@@ -84,7 +84,7 @@ public class VenueListAdapter  extends ArrayAdapter<FourSquareResponse> {
 
         String venueImage = null;
 
-        if(fourSquareResponse.getTips().size() > 0){
+        if(fourSquareResponse.getTips()!= null && fourSquareResponse.getTips().size() > 0){
 
             for (Tip tip : fourSquareResponse.getTips()){
 

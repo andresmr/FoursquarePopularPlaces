@@ -3,7 +3,7 @@ package com.andresmr.foursquarepopularplaces.presenter;
 import com.andresmr.foursquarepopularplaces.interactor.SearchVenueInteractor;
 import com.andresmr.foursquarepopularplaces.interactor.SearchVenueInteractorImpl;
 import com.andresmr.foursquarepopularplaces.R;
-import com.andresmr.foursquarepopularplaces.VenuesRequestListener;
+import com.andresmr.foursquarepopularplaces.listener.VenuesRequestListener;
 import com.andresmr.foursquarepopularplaces.pojo.FourSquareResponse;
 import com.andresmr.foursquarepopularplaces.view.SearchVenueView;
 
@@ -40,11 +40,14 @@ public class SearchVenuesPresenterImpl implements SearchVenuesPresenter, VenuesR
     @Override
     public void onGetVenuesSuccessful(List<FourSquareResponse> fourSquareResponseList) {
 
+        mView.hideKeyboard();
         mView.showResults(fourSquareResponseList);
     }
 
     @Override
     public void onGetVenuesError() {
 
+        mView.hideKeyboard();
+        mView.showNoResults();
     }
 }
