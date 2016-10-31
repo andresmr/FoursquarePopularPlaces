@@ -27,7 +27,7 @@
             android:id="@+id/tvVenueName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/purple"
             android:textStyle="bold"
             android:textSize="@dimen/text_title"/>
 
